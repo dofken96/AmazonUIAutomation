@@ -3,6 +3,7 @@ from playwright.sync_api import expect
 from components.header_components import HeaderComponents
 from config import BASE_URL
 from pages.base_page import BasePage
+from playwright.sync_api import Error as PlaywrightError
 
 
 class HomePage(BasePage):
@@ -13,9 +14,14 @@ class HomePage(BasePage):
 
 
 
+
     def open(self):
-        self.page.goto(BASE_URL)
-        self.wait_for_page_loaded()
+        self.safe_goto(
+            url=BASE_URL,
+            ready_locator=self.header.search_box,
+            retries=3,
+            timeout=15000,
+        )
 
 
     def verify_main_attributes_visible(self):

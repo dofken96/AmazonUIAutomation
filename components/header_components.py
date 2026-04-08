@@ -20,8 +20,17 @@ class HeaderComponents(BasePage):
 
 
     def get_number_of_items_in_cart(self):
+        # expect(self.cart_count_locator).to_be_visible()
         self.page.reload()
         expect(self.cart_count_locator).to_be_visible()
         return int(self.cart_count_locator.inner_text()) if self.cart_count_locator.is_visible() else 0
+
+    def go_to_home_page(self):
+        expect(self.main_page_button).to_be_visible()
+        self.main_page_button.click()
+
+    def open_cart_page(self):
+        expect(self.card_link).to_be_visible()
+        self.card_link.click()
 
 

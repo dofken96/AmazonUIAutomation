@@ -1,18 +1,21 @@
+
 from playwright.sync_api import expect
 
+from components.header_components import HeaderComponents
 from pages.base_page import BasePage
 
 
 class SearchResultPage(BasePage):
     def __init__(self, page):
         super().__init__(page)
+        self.header = HeaderComponents(page)
 
         self.search_result_header = page.locator('.a-size-base.a-spacing-small.a-spacing-top-small.a-text-normal')
         self.search_product_name = self.search_result_header.locator('.a-color-state.a-text-bold')
         self.list_of_searched_items = page.locator('.s-main-slot.s-result-list.s-search-results.sg-row')
-        # self.add_to_cart_button = page.get_by_role('button', name='Add to cart')
 
-        self.items = page.locator('div[data-component-type="s-search-result"][data-asin]:not([data-asin=""])')
+        # self.items = page.locator('div[data-component-type="s-search-result"][data-asin]:not([data-asin=""])')
+        self.items = page.locator('div[role="listitem"]')
 
 
 
@@ -20,8 +23,7 @@ class SearchResultPage(BasePage):
         expect(self.search_product_name).to_contain_text(search_product_name)
 
 
-
-    def add_product_first_product_from_list_to_cart(self):
+    def add_first_product_from_list_to_cart(self):
         self.wait_for_page_loaded()
 
         first_item = self.items.nth(0)
@@ -31,14 +33,42 @@ class SearchResultPage(BasePage):
 
         add_to_cart_button.click()
 
-        # counter: int = 0
-        #
-        # if self.items.nth(counter):
-        #     add_to_cart_button.click()
-        # else:
-        #     while not self.items.nth(counter):
-        #         counter += 1
-        #     add_to_cart_button.click()
+        stepper_controls = first_item.locator('.a-stepper-controls')
+        expect(stepper_controls).to_be_visible()
+
+
+
+
+    def click_on_first_product(self):
+        self.wait_for_page_loaded()
+
+        first_item = self.items.nth(0)
+        expect(first_item).to_be_visible()
+        header = first_item.locator("a h2")
+        header.click()
+
+    def add_several_products_to_cart(self, number_of_products: int):
+        expect(self.items.last).to_be_visible()
+
+        for i in range(number_of_products):
+
+            expect(self.header.cart_count_locator).to_be_visible()
+            before_number = self.header.get_number_of_items_in_cart()
+
+            item = self.items.nth(i)
+            expect(item).to_be_visible()
+            item.scroll_into_view_if_needed()
+            add_to_cart_button = item.get_by_role('button', name='Add to cart')
+            add_to_cart_button.click()
+
+            expect(self.header.cart_count_locator).to_have_text(str(before_number + 1))
+
+            after = self.header.get_number_of_items_in_cart()
+
+            assert after == before_number + 1
+
+
+
 
 
 
