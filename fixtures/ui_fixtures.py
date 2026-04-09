@@ -22,6 +22,15 @@ def page(browser):
     context.close()
 
 
+@pytest.fixture(scope='function')
+def mobile_page(browser):
+    """iPhone 14–style viewport for responsive smoke tests (AMZ-0010)."""
+    context = browser.new_context(viewport={'width': 390, 'height': 844})
+    page = context.new_page()
+    yield page
+    context.close()
+
+
 
 
 def change_localization(page, country_label: str) -> Page:

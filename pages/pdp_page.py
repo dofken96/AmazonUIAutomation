@@ -10,12 +10,22 @@ class ProductDetailPage(BasePage):
         self.header = HeaderComponents(page)
 
         self.product_title = page.locator('#title')
+        self.main_product_image = page.locator("#landingImage, #imgTagWrapperId img")
+        self.alt_images_gallery = page.locator("#altImages, #imageBlockThumbs")
+        self.main_image_container = page.locator("#main-image-container")
 
 
 
     def get_product_title_name(self) -> str:
-        expect(self.product_title).not_to_be_visible()
+        expect(self.product_title).to_be_visible()
         return self.product_title.inner_text()
+
+    def verify_product_gallery_visible(self):
+        expect(self.main_product_image).to_be_visible(timeout=15000)
+        if self.alt_images_gallery.count() > 0:
+            expect(self.alt_images_gallery.nth(0)).to_be_visible(timeout=15000)
+        else:
+            expect(self.main_image_container).to_be_visible(timeout=15000)
 
 
 

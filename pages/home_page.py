@@ -1,5 +1,6 @@
 from playwright.sync_api import expect
 
+from components.footer_components import FooterComponents
 from components.header_components import HeaderComponents
 from config import BASE_URL
 from pages.base_page import BasePage
@@ -11,6 +12,7 @@ class HomePage(BasePage):
     def __init__(self, page):
         super().__init__(page)
         self.header = HeaderComponents(page)
+        self.footer = FooterComponents(page)
 
 
 
@@ -41,4 +43,35 @@ class HomePage(BasePage):
     def dismiss_toaster(self):
         """Remove the location/delivery toaster that can intercept clicks."""
         self.page.evaluate("document.querySelector('.glow-toaster')?.remove()")
-        
+
+    def verify_no_severe_console_errors(self):
+        console_errors = []
+
+        def handle_console(msg):
+            if msg.type == "error":
+                console_errors.append(msg.text)
+
+        self.page.on("console", handle_console)
+        self.open()
+        self.page.wait_for_timeout(2000)
+
+        ignored_tokens = (
+            "amazon-adsystem",
+            "aax-us",
+            "adsystem",
+            "failed to load resource",
+            "net::err_blocked_by_client",
+            "tracking",
+            "analytics",
+        )
+        severe_keywords = ("uncaught", "typeerror", "referenceerror", "syntaxerror")
+
+        severe_errors = []
+        for entry in console_errors:
+            lower_entry = entry.lower()
+            if any(token in lower_entry for token in ignored_tokens):
+                continue
+            if any(keyword in lower_entry for keyword in severe_keywords):
+                severe_errors.append(entry)
+
+        assert not severe_errors, f"Severe console errors found: {severe_errors}"

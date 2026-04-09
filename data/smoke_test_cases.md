@@ -36,7 +36,7 @@
 
 ---
 
-### AMZ-0001
+### AMZ-0001 -- DONE
 
 **Homepage loads and key header components visible**
 
@@ -68,7 +68,7 @@ Medium risk — site may display bot/captcha challenge that blocks page load.
 
 ---
 
-### AMZ-0002
+### AMZ-0002 -- DONE
 
 **Search from header returns results page**
 
@@ -101,7 +101,7 @@ Medium risk.
 
 ---
 
-### AMZ-0003
+### AMZ-0003 -- DONE
 
 **Open a product from search results**
 
@@ -134,7 +134,7 @@ Medium risk.
 
 ---
 
-### AMZ-0004
+### AMZ-0004 -- DONE
 
 **Add product to cart (from PDP)**
 
@@ -167,7 +167,7 @@ High risk — variant selection and product availability can vary; "Add to Cart"
 
 ---
 
-### AMZ-0005
+### AMZ-0005 -- DONE
 
 **Open cart page**
 
@@ -199,7 +199,7 @@ Medium risk.
 
 ---
 
-### AMZ-0006
+### AMZ-0006 -- DONE (XFAIL)
 
 **Proceed to checkout entry point**
 
@@ -298,7 +298,7 @@ Medium risk.
 
 ---
 
-### AMZ-0009
+### AMZ-0009 -- DONE
 
 **Footer links section visible and at least one policy link works**
 
@@ -332,7 +332,7 @@ Medium risk.
 
 ---
 
-### AMZ-0010
+### AMZ-0010 -- DONE
 
 **Basic responsive check: mobile viewport shows mobile header**
 
@@ -364,7 +364,7 @@ Medium risk.
 
 ---
 
-### AMZ-0011
+### AMZ-0011 -- DONE
 
 **Language/Region selector entry opens**
 
@@ -395,7 +395,7 @@ High risk — this UI varies significantly by geographic region and may not be p
 
 ---
 
-### AMZ-0012
+### AMZ-0012 -- DONE
 
 **Search suggestions dropdown appears**
 
@@ -427,7 +427,7 @@ Medium risk.
 
 ---
 
-### AMZ-0013
+### AMZ-0013 -- DONE
 
 **Open sign-in page via Account & Lists**
 
@@ -460,7 +460,7 @@ High risk — bot/captcha protection is frequently triggered on the sign-in page
 
 ---
 
-### AMZ-0014
+### AMZ-0014 -- DONE
 
 **Search results sorting control is visible**
 
@@ -491,7 +491,7 @@ Medium risk.
 
 ---
 
-### AMZ-0015
+### AMZ-0015 -- DONE
 
 **Product image gallery is present on PDP**
 
@@ -555,7 +555,7 @@ Medium risk.
 
 ---
 
-### AMZ-0017
+### AMZ-0017 -- DONE
 
 **Search results pagination/next control exists (if multiple pages)**
 
@@ -587,7 +587,7 @@ Medium risk.
 
 ---
 
-### AMZ-0018
+### AMZ-0018 -- DONE
 
 **Open customer service/help page from nav**
 
@@ -620,7 +620,7 @@ Medium risk.
 
 ---
 
-### AMZ-0019
+### AMZ-0019 -- DONE
 
 **Open Gift Cards page from nav**
 
@@ -652,7 +652,7 @@ Medium risk.
 
 ---
 
-### AMZ-0020
+### AMZ-0020 -- DONE
 
 **No severe console errors on homepage load (basic)**
 
@@ -686,3 +686,7 @@ Medium risk — Amazon loads many third-party scripts; filter criteria for "seve
 ---
 
 *End of Smoke Test Cases*
+
+
+
+

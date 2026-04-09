@@ -2,3 +2,10 @@
 .idea
 *.iml
 .env
+.venv/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyc.*
+.playwright-mcp/
+scripts/.auth/

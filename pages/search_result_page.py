@@ -1,4 +1,4 @@
-
+import re
 from playwright.sync_api import expect
 
 from components.header_components import HeaderComponents
@@ -13,6 +13,10 @@ class SearchResultPage(BasePage):
         self.search_result_header = page.locator('.a-size-base.a-spacing-small.a-spacing-top-small.a-text-normal')
         self.search_product_name = self.search_result_header.locator('.a-color-state.a-text-bold')
         self.list_of_searched_items = page.locator('.s-main-slot.s-result-list.s-search-results.sg-row')
+        self.sort_combobox = page.get_by_role("combobox", name=re.compile(r"sort by", re.I))
+        self.sort_prompt = page.locator("span.a-dropdown-prompt")
+        self.next_page_link = page.locator("a.s-pagination-next, a[aria-label*='Go to next page']")
+        self.pagination_container = page.locator(".s-pagination-container")
 
         # self.items = page.locator('div[data-component-type="s-search-result"][data-asin]:not([data-asin=""])')
         self.items = page.locator('div[role="listitem"]')
@@ -67,6 +71,25 @@ class SearchResultPage(BasePage):
             after = self.header.get_number_of_items_in_cart()
 
             assert after == before_number + 1
+
+    def verify_sort_control_visible(self):
+        self.wait_for_page_loaded()
+
+        if self.sort_combobox.count() > 0:
+            expect(self.sort_combobox).to_be_visible()
+            return
+
+        expect(self.sort_prompt).to_be_visible()
+
+    def verify_pagination_next_control_visible(self):
+        self.wait_for_page_loaded()
+        self.page.mouse.wheel(0, 12000)
+
+        if self.next_page_link.count() > 0:
+            expect(self.next_page_link).to_be_visible(timeout=15000)
+            return
+
+        expect(self.pagination_container).to_be_visible(timeout=15000)
 
 
 
