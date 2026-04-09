@@ -5,7 +5,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect, Page, Browser
 
 from config import BASE_URL, LOGIN_EMAIL, LOGIN_PASSWORD
-AUTH_FILE = Path("AmazonUI/scripts/.auth/dou_user.json")
+AUTH_FILE = Path("scripts/.auth/dou_user.json")
 
 
 def login_amazon(page: Page):

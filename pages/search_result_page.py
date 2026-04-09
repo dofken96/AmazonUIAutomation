@@ -52,6 +52,7 @@ class SearchResultPage(BasePage):
 
         for i in range(number_of_products):
 
+            self.page.reload()
             expect(self.header.cart_count_locator).to_be_visible()
             before_number = self.header.get_number_of_items_in_cart()
 

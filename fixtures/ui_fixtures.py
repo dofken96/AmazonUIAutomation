@@ -54,7 +54,7 @@ def localized_page(browser):
     context = browser.new_context()
     page = context.new_page()
 
-    localized_page = change_localization(page, country_label='Canada')
+    localized_page = change_localization(page, country_label='Poland')
     yield localized_page
     context.close()
 

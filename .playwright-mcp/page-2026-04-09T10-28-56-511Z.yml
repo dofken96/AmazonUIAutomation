@@ -1,0 +1,726 @@
+- generic [ref=e2]:
+  - navigation "Shortcuts menu" [ref=e3]:
+    - heading "Skip to" [level=2] [ref=e4]
+    - list "Skip to" [ref=e5]:
+      - listitem [ref=e6]:
+        - link "main content" [ref=e7] [cursor=pointer]:
+          - /url: "#skippedLink"
+          - text: Main content
+    - separator [ref=e8]
+    - heading "Keyboard shortcuts" [level=2] [ref=e9]
+    - list "Keyboard shortcuts" [ref=e10]:
+      - listitem [ref=e11]:
+        - link "Search, alt, forward slash" [ref=e12] [cursor=pointer]:
+          - /url: javascript:void(0)
+          - generic [ref=e13]:
+            - generic [ref=e14]: Search
+            - generic [ref=e15]:
+              - generic [ref=e16]: alt
+              - generic [ref=e17]: +
+              - generic [ref=e18]: /
+      - listitem [ref=e19]:
+        - link "Cart, shift, alt, c" [ref=e20] [cursor=pointer]:
+          - /url: javascript:void(0)
+          - generic [ref=e21]:
+            - generic [ref=e22]: Cart
+            - generic [ref=e23]:
+              - generic [ref=e24]: shift
+              - generic [ref=e25]: +
+              - generic [ref=e26]: alt
+              - generic [ref=e27]: +
+              - generic [ref=e28]: C
+      - listitem [ref=e29]:
+        - link "Home, shift, alt, h" [ref=e30] [cursor=pointer]:
+          - /url: javascript:void(0)
+          - generic [ref=e31]:
+            - generic [ref=e32]: Home
+            - generic [ref=e33]:
+              - generic [ref=e34]: shift
+              - generic [ref=e35]: +
+              - generic [ref=e36]: alt
+              - generic [ref=e37]: +
+              - generic [ref=e38]: H
+      - listitem [ref=e39]:
+        - link "Your orders, shift, alt, o" [ref=e40] [cursor=pointer]:
+          - /url: javascript:void(0)
+          - generic [ref=e41]:
+            - generic [ref=e42]: Orders
+            - generic [ref=e43]:
+              - generic [ref=e44]: shift
+              - generic [ref=e45]: +
+              - generic [ref=e46]: alt
+              - generic [ref=e47]: +
+              - generic [ref=e48]: O
+      - listitem [ref=e49]:
+        - button "Show/hide shortcuts, shift, alt, z" [ref=e50] [cursor=pointer]:
+          - generic [ref=e51]:
+            - generic [ref=e52]: Show/Hide shortcuts
+            - generic [ref=e53]:
+              - generic [ref=e54]: shift
+              - generic [ref=e55]: +
+              - generic [ref=e56]: alt
+              - generic [ref=e57]: +
+              - generic [ref=e58]: Z
+    - generic [ref=e64]: To move between items, use your keyboard's up or down arrows.
+  - banner [ref=e65]:
+    - navigation "Primary" [ref=e66]:
+      - generic [ref=e67]:
+        - generic [ref=e68]:
+          - link "Amazon" [ref=e70] [cursor=pointer]:
+            - /url: /ref=nav_logo
+          - button "Deliver to Ukraine" [ref=e73] [cursor=pointer]:
+            - generic [ref=e75]:
+              - generic [ref=e76]: Deliver to
+              - generic [ref=e77]: Ukraine
+        - search [ref=e80]:
+          - generic [ref=e83]:
+            - generic [ref=e85]: Deals
+            - combobox "Select the department you want to search in" [ref=e87] [cursor=pointer]:
+              - option "Deals" [selected]
+              - option "All Departments"
+              - option "Arts & Crafts"
+              - option "Automotive"
+              - option "Baby"
+              - option "Beauty & Personal Care"
+              - option "Books"
+              - option "Boys' Fashion"
+              - option "Computers"
+              - option "Deals"
+              - option "Digital Music"
+              - option "Electronics"
+              - option "Girls' Fashion"
+              - option "Health & Household"
+              - option "Home & Kitchen"
+              - option "Industrial & Scientific"
+              - option "Kindle Store"
+              - option "Luggage"
+              - option "Men's Fashion"
+              - option "Movies & TV"
+              - option "Music, CDs & Vinyl"
+              - option "Pet Supplies"
+              - option "Prime Video"
+              - option "Software"
+              - option "Sports & Outdoors"
+              - option "Tools & Home Improvement"
+              - option "Toys & Games"
+              - option "Video Games"
+              - option "Women's Fashion"
+          - searchbox "Search Amazon" [ref=e90]
+          - generic "Go" [ref=e93] [cursor=pointer]:
+            - button "Go" [ref=e94]
+        - generic [ref=e96]:
+          - generic [ref=e97]:
+            - link "Choose a language for shopping in Amazon United States. The current selection is English (EN)." [ref=e98] [cursor=pointer]:
+              - /url: /customer-preferences/edit?ie=UTF8&preferencesReturnUrl=%2F&ref_=topnav_lang_ais
+              - generic [ref=e101]:
+                - img "United States" [ref=e102]
+                - generic [ref=e103]: EN
+            - button "Expand to Change Language or Country" [ref=e104] [cursor=pointer]
+          - generic [ref=e105]:
+            - link "Hello, sign in Account & Lists" [ref=e106] [cursor=pointer]:
+              - /url: https://www.amazon.com/ap/signin?openid.return_to=https%3A%2F%2Fwww.amazon.com%2Fgp%2Fgoldbox%3Fref_%3Dnav_ya_signin&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=usflex&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0
+              - generic [ref=e108]: Hello, sign in
+              - generic [ref=e109]: Account & Lists
+            - button "Expand Account and Lists" [ref=e110] [cursor=pointer]
+          - link "Returns & Orders" [ref=e111] [cursor=pointer]:
+            - /url: /gp/css/order-history?ref_=nav_orders_first
+            - generic [ref=e112]: Returns
+            - generic [ref=e113]: "& Orders"
+          - link "0 items in cart" [ref=e114] [cursor=pointer]:
+            - /url: /gp/cart/view.html?ref_=nav_cart
+            - generic [ref=e116]: "0"
+            - generic [ref=e119]: Cart
+      - alertdialog "International Shopping Transition Alert" [ref=e120]:
+        - generic [ref=e121]:
+          - generic [ref=e125]:
+            - text: We're showing you items that ship to
+            - strong [ref=e126]: Ukraine
+            - text: . To see items that ship to a different country, change your delivery address.
+          - generic [ref=e127]:
+            - generic [ref=e129] [cursor=pointer]:
+              - button "Submit" [ref=e130]
+              - generic [ref=e131]: Dismiss
+            - generic [ref=e133] [cursor=pointer]:
+              - button "Submit" [ref=e134]
+              - generic [ref=e135]: Change Address
+      - generic [ref=e136]:
+        - button "Open All Categories Menu" [ref=e138] [cursor=pointer]:
+          - generic [ref=e140]: All
+        - list [ref=e144]:
+          - listitem [ref=e145]:
+            - link "Today's Deals" [ref=e147] [cursor=pointer]:
+              - /url: /gp/goldbox?ref_=nav_cs_gb
+          - listitem [ref=e148]:
+            - link "Gift Cards" [ref=e150] [cursor=pointer]:
+              - /url: /gift-cards/b/?ie=UTF8&node=2238192011&ref_=nav_cs_gc
+          - listitem [ref=e151]:
+            - link "Sell" [ref=e153] [cursor=pointer]:
+              - /url: /b/?_encoding=UTF8&ld=AZUSSOA-sell&node=12766669011&ref_=nav_cs_sell
+          - listitem [ref=e154]:
+            - link "Registry" [ref=e156] [cursor=pointer]:
+              - /url: /gp/browse.html?node=16115931011&ref_=nav_cs_registry
+          - listitem [ref=e157]:
+            - link "Prime Video" [ref=e159] [cursor=pointer]:
+              - /url: /Amazon-Video/b/?ie=UTF8&node=2858778011&ref_=nav_cs_prime_video
+          - listitem [ref=e160]:
+            - link "Customer Service" [ref=e162] [cursor=pointer]:
+              - /url: /gp/help/customer/display.html?nodeId=508510&ref_=nav_cs_customerservice
+          - link "Click to call our Disability Customer Support line, or reach us directly at 1-888-283-1678" [ref=e163] [cursor=pointer]:
+            - /url: /gp/help/customer/accessibility
+            - text: Disability Customer Support
+      - generic [ref=e167]:
+        - link "Today's Deals" [ref=e168] [cursor=pointer]:
+          - /url: /gp/goldbox/?ie=UTF8&ref_=topnav_storetab_subnav_goldbox
+        - link "Coupons" [ref=e169] [cursor=pointer]:
+          - /url: /coupons/?_encoding=UTF8&ref_=sv_subnav_goldbox_1
+        - link "Renewed Deals" [ref=e170] [cursor=pointer]:
+          - /url: /b/?ie=UTF8&node=16976406011&ref_=sv_subnav_goldbox_2
+        - link "Outlet" [ref=e171] [cursor=pointer]:
+          - /url: /outlet/?_encoding=UTF8&ref_=sv_subnav_goldbox_3
+        - link "Amazon Resale" [ref=e172] [cursor=pointer]:
+          - /url: /b/?ie=UTF8&node=1267877011&ref_=sv_subnav_goldbox_4
+        - link "Grocery Deals" [ref=e173] [cursor=pointer]:
+          - /url: /fmc/m/30002233/?_encoding=UTF8&almBrandId=QW1hem9uIEZyZXNo&ref_=sv_subnav_goldbox_5
+  - generic [ref=e179]:
+    - status [ref=e180]:
+      - paragraph
+    - generic [ref=e181]:
+      - generic "Browse by" [ref=e183]:
+        - button [ref=e184] [cursor=pointer]:
+          - img [ref=e185]
+        - list [ref=e187]:
+          - listitem [ref=e188]:
+            - button "Lightning deals" [ref=e189] [cursor=pointer]
+          - listitem [ref=e190]:
+            - button "Customers' Most-Loved" [ref=e191] [cursor=pointer]
+          - listitem [ref=e192]:
+            - button "Outlet" [ref=e193] [cursor=pointer]
+          - listitem [ref=e194]:
+            - button "Lowest Price in 365 Days" [ref=e195] [cursor=pointer]
+          - listitem [ref=e196]:
+            - button "Final Sale" [ref=e197] [cursor=pointer]
+          - listitem [ref=e198]:
+            - button "Beauty" [ref=e199] [cursor=pointer]
+          - listitem [ref=e200]:
+            - button "Fashion" [ref=e201] [cursor=pointer]
+          - listitem [ref=e202]:
+            - button "Home" [ref=e203] [cursor=pointer]
+          - listitem [ref=e204]:
+            - button "Toys & Games" [ref=e205] [cursor=pointer]
+          - listitem [ref=e206]:
+            - button "Electronics" [ref=e207] [cursor=pointer]
+          - listitem [ref=e208]:
+            - button "Devices" [ref=e209] [cursor=pointer]
+          - listitem [ref=e210]:
+            - button "Kitchen" [ref=e211] [cursor=pointer]
+          - listitem [ref=e212]:
+            - button "Everyday Essentials" [ref=e213] [cursor=pointer]
+          - listitem [ref=e214]:
+            - button "Amazon Brands" [ref=e215] [cursor=pointer]
+          - listitem [ref=e216]:
+            - button "Computers & Accessories" [ref=e217] [cursor=pointer]
+          - listitem [ref=e218]:
+            - button "Pet Supplies" [ref=e219] [cursor=pointer]
+          - listitem [ref=e220]:
+            - button "Furniture" [ref=e221] [cursor=pointer]
+          - listitem [ref=e222]:
+            - button "TVs & Accessories" [ref=e223] [cursor=pointer]
+          - listitem [ref=e224]:
+            - button "Home DIY & Appliances" [ref=e225] [cursor=pointer]
+          - listitem [ref=e226]:
+            - button "Sports & Outdoors" [ref=e227] [cursor=pointer]
+          - listitem [ref=e228]:
+            - button "Grocery" [ref=e229] [cursor=pointer]
+          - listitem [ref=e230]:
+            - button "Health & Household" [ref=e231] [cursor=pointer]
+          - listitem [ref=e232]:
+            - button "Cell Phones & Accessories" [ref=e233] [cursor=pointer]
+          - listitem [ref=e234]:
+            - button "Small Business" [ref=e235] [cursor=pointer]
+          - listitem [ref=e236]:
+            - button "Video Games" [ref=e237] [cursor=pointer]
+          - listitem [ref=e238]:
+            - button "Lawn & Garden" [ref=e239] [cursor=pointer]
+          - listitem [ref=e240]:
+            - button "Automotive" [ref=e241] [cursor=pointer]
+          - listitem [ref=e242]:
+            - button "Camera & Photo" [ref=e243] [cursor=pointer]
+          - listitem [ref=e244]:
+            - button "Books" [ref=e245] [cursor=pointer]
+          - listitem [ref=e246]:
+            - button "Jewelry" [ref=e247] [cursor=pointer]
+          - listitem [ref=e248]:
+            - button "Baby" [ref=e249] [cursor=pointer]
+          - listitem [ref=e250]:
+            - button "Office Supplies" [ref=e251] [cursor=pointer]
+          - listitem [ref=e252]:
+            - button "Fan Shop" [ref=e253] [cursor=pointer]
+          - listitem [ref=e254]:
+            - button "Musical Instruments" [ref=e255] [cursor=pointer]
+          - listitem [ref=e256]:
+            - button "Coupons" [ref=e257] [cursor=pointer]
+        - button [ref=e258] [cursor=pointer]:
+          - img [ref=e259]
+      - heading "Discounts grid" [level=2] [ref=e260]
+      - generic [ref=e261]:
+        - generic [ref=e262]:
+          - text: Department
+          - radiogroup "Department" [ref=e263]:
+            - generic [ref=e266]:
+              - radio "All" [checked] [ref=e267]
+              - generic [ref=e269]: All
+            - generic [ref=e272]:
+              - radio "Amazon Devices & Accessories" [ref=e273]
+              - generic [ref=e275]: Amazon Devices & Accessories
+            - generic [ref=e278]:
+              - radio "Appliances" [ref=e279]
+              - generic [ref=e281]: Appliances
+            - generic [ref=e284]:
+              - radio "Arts, Crafts & Sewing" [ref=e285]
+              - generic [ref=e287]: Arts, Crafts & Sewing
+            - generic [ref=e290]:
+              - radio "Audible Books & Originals" [ref=e291]
+              - generic [ref=e293]: Audible Books & Originals
+          - generic [ref=e294]: See more filter options
+          - button "See more filter options" [ref=e295] [cursor=pointer]:
+            - link [ref=e296]:
+              - /url: javascript:void(0)
+              - text: See more
+        - generic [ref=e297]:
+          - text: Brands
+          - group "Brands" [ref=e298]:
+            - generic [ref=e301]:
+              - checkbox "Samsung" [ref=e302]
+              - generic [ref=e304]: Samsung
+            - generic [ref=e307]:
+              - checkbox "DREAM PAIRS" [ref=e308]
+              - generic [ref=e310]: DREAM PAIRS
+            - generic [ref=e313]:
+              - checkbox "Intuit" [ref=e314]
+              - generic [ref=e316]: Intuit
+            - generic [ref=e319]:
+              - checkbox "G Gradual" [ref=e320]
+              - generic [ref=e322]: G Gradual
+          - generic [ref=e323]: See more filter options
+          - button "See more filter options" [ref=e324] [cursor=pointer]:
+            - link [ref=e325]:
+              - /url: javascript:void(0)
+              - text: See more
+        - generic [ref=e326]:
+          - text: Customer Reviews
+          - radiogroup "Customer Reviews" [ref=e327]:
+            - generic [ref=e330]:
+              - radio "All" [checked] [ref=e331]
+              - generic [ref=e333]: All
+            - generic [ref=e336]:
+              - radio "Average review star rating of 4 and up" [ref=e337]
+              - generic "Average review star rating of 4 and up" [ref=e340]:
+                - generic [ref=e342]: "& up"
+        - generic [ref=e343]:
+          - text: Price
+          - generic [ref=e344]: $0 – $2,000
+          - generic [ref=e346]:
+            - slider "Minimum Price": "0"
+            - slider "Maximum Price": "156"
+        - generic [ref=e352]:
+          - text: Discount
+          - generic [ref=e353]: 0% – 100%
+          - generic [ref=e355]:
+            - slider "Minimum discount": "0"
+            - slider "Maximum discount": "75"
+        - generic [ref=e361]:
+          - text: Prime Programs
+          - group "Prime Programs" [ref=e362]:
+            - generic [ref=e365]:
+              - checkbox "Prime Exclusive" [ref=e366]
+              - generic [ref=e368]: Prime Exclusive
+      - generic [ref=e369]:
+        - navigation "Discounts grid sub-sections":
+          - list [ref=e370]:
+            - listitem [ref=e371]:
+              - link "Can't-miss offers" [ref=e372] [cursor=pointer]:
+                - /url: "#"
+        - list [ref=e377]:
+          - listitem [ref=e378]:
+            - group [ref=e382]:
+              - generic [ref=e383]:
+                - link "TurboTax Deluxe Desktop Edition 2025, Federal & State Tax Return [Win11/Mac14 Download]" [ref=e384] [cursor=pointer]:
+                  - /url: https://www.amazon.com/TurboTax-Deluxe-Desktop-Federal-Download/dp/B0FWV56H48?ref=dlx_deals_dg_dcl_B0FWV56H48_dt_sl14_ea_pi&pf_rd_r=VMHDPZNJ4CK27AEH46VJ&pf_rd_p=3c07539d-aee5-4e06-8887-6e67f714ccea
+                  - img "TurboTax Deluxe Desktop Edition 2025, Federal & State Tax Return [Win11/Mac14 Download]" [ref=e387]
+                - button "Add to cart" [ref=e390]:
+                  - img [ref=e392]
+              - 'link "30% off Limited time deal Deal Price: $55.99 List: $79.99 TurboTax Deluxe Desktop Edition 2025, Federal & State Tax Return [Win11/Mac14 Download]" [ref=e394] [cursor=pointer]':
+                - /url: https://www.amazon.com/TurboTax-Deluxe-Desktop-Federal-Download/dp/B0FWV56H48?ref=dlx_deals_dg_dcl_B0FWV56H48_dt_sl14_ea&pf_rd_r=VMHDPZNJ4CK27AEH46VJ&pf_rd_p=3c07539d-aee5-4e06-8887-6e67f714ccea
+                - generic [ref=e397]: 30% off Limited time deal
+                - generic [ref=e398]:
+                  - generic [ref=e400]:
+                    - generic [ref=e401]: "Deal Price: $55.99"
+                    - generic [ref=e402]:
+                      - text: $
+                      - generic [ref=e403]:
+                        - text: "55"
+                        - generic [ref=e404]: .
+                      - text: "99"
+                  - generic [ref=e405]:
+                    - text: "List:"
+                    - generic [ref=e406]:
+                      - generic [ref=e407]: "List: $79.99"
+                      - generic [ref=e408]: $79.99
+                - paragraph [ref=e409]:
+                  - generic [ref=e411]:
+                    - generic [ref=e412]: TurboTax Deluxe Desktop Edition 2025, Federal & State Tax Return [Win11/Mac14 Download]
+                    - generic [ref=e413]: TurboTax Deluxe Desktop Edition 2025, Federal & State Tax Return…
+              - button "Shop Intuit deals" [ref=e415] [cursor=pointer]:
+                - generic [ref=e417]:
+                  - generic [ref=e418]: Shop Intuit deals
+                  - generic [ref=e419]: Shop Intuit deals
+  - complementary "Your recently viewed items and featured recommendations" [ref=e422]:
+    - generic [ref=e430]:
+      - heading "See personalized recommendations" [level=2] [ref=e431]
+      - link "Sign in" [ref=e434] [cursor=pointer]:
+        - /url: https://www.amazon.com/ap/signin?openid.mode=checkid_setup&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.return_to=https%3A%2F%2Fwww.amazon.com%2Fref%3Drhf_sign_in&openid.assoc_handle=usflex&openid.pape.max_auth_age=0
+      - generic [ref=e435]:
+        - text: New customer?
+        - link "Start here." [ref=e436] [cursor=pointer]:
+          - /url: https://www.amazon.com/ap/register?openid.mode=checkid_setup&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.return_to=https%3A%2F%2Fwww.amazon.com%2Fref%3Drhf_sign_in&openid.assoc_handle=usflex
+  - generic [ref=e437]:
+    - button "Back to top" [ref=e438] [cursor=pointer]:
+      - generic [ref=e439]: Back to top
+    - generic [ref=e440]:
+      - generic [ref=e441]:
+        - heading "Get to Know Us" [level=6] [ref=e442]
+        - list [ref=e443]:
+          - listitem [ref=e444]:
+            - link "Careers" [ref=e445] [cursor=pointer]:
+              - /url: https://www.amazon.jobs
+          - listitem [ref=e446]:
+            - link "Blog" [ref=e447] [cursor=pointer]:
+              - /url: https://blog.aboutamazon.com/?utm_source=gateway&utm_medium=footer
+          - listitem [ref=e448]:
+            - link "About Amazon" [ref=e449] [cursor=pointer]:
+              - /url: https://www.aboutamazon.com/?utm_source=gateway&utm_medium=footer
+          - listitem [ref=e450]:
+            - link "Investor Relations" [ref=e451] [cursor=pointer]:
+              - /url: https://www.amazon.com/ir
+          - listitem [ref=e452]:
+            - link "Amazon Devices" [ref=e453] [cursor=pointer]:
+              - /url: /gp/browse.html?node=2102313011&ref_=footer_devices
+          - listitem [ref=e454]:
+            - link "Amazon Science" [ref=e455] [cursor=pointer]:
+              - /url: https://www.amazon.science
+      - generic [ref=e457]:
+        - heading "Make Money with Us" [level=6] [ref=e458]
+        - list [ref=e459]:
+          - listitem [ref=e460]:
+            - link "Sell products on Amazon" [ref=e461] [cursor=pointer]:
+              - /url: https://services.amazon.com/sell.html?ld=AZFSSOA&ref_=footer_soa
+          - listitem [ref=e462]:
+            - link "Sell on Amazon Business" [ref=e463] [cursor=pointer]:
+              - /url: https://services.amazon.com/amazon-business.html?ld=usb2bunifooter&ref_=footer_b2b
+          - listitem [ref=e464]:
+            - link "Sell apps on Amazon" [ref=e465] [cursor=pointer]:
+              - /url: https://developer.amazon.com
+          - listitem [ref=e466]:
+            - link "Become an Affiliate" [ref=e467] [cursor=pointer]:
+              - /url: https://affiliate-program.amazon.com/
+          - listitem [ref=e468]:
+            - link "Advertise Your Products" [ref=e469] [cursor=pointer]:
+              - /url: https://advertising.amazon.com/?ref=ext_amzn_ftr
+          - listitem [ref=e470]:
+            - link "Self-Publish with Us" [ref=e471] [cursor=pointer]:
+              - /url: /gp/seller-account/mm-summary-page.html?ld=AZFooterSelfPublish&topic=200260520&ref_=footer_publishing
+          - listitem [ref=e472]:
+            - link "Host an Amazon Hub" [ref=e473] [cursor=pointer]:
+              - /url: https://go.thehub-amazon.com/amazon-hub-locker
+          - listitem [ref=e474]:
+            - text: ›
+            - link "See More Make Money with Us" [ref=e475] [cursor=pointer]:
+              - /url: /b/?node=18190131011&ld=AZUSSOA-seemore&ref_=footer_seemore
+      - generic [ref=e477]:
+        - heading "Amazon Payment Products" [level=6] [ref=e478]
+        - list [ref=e479]:
+          - listitem [ref=e480]:
+            - link "Amazon Business Card" [ref=e481] [cursor=pointer]:
+              - /url: /dp/B07984JN3L?plattr=ACOMFO&ie=UTF-8
+          - listitem [ref=e482]:
+            - link "Shop with Points" [ref=e483] [cursor=pointer]:
+              - /url: /gp/browse.html?node=16218619011&ref_=footer_swp
+          - listitem [ref=e484]:
+            - link "Reload Your Balance" [ref=e485] [cursor=pointer]:
+              - /url: /dp/B0CHTVMXZJ?th=1?ref_=footer_reload_us
+          - listitem [ref=e486]:
+            - link "Amazon Currency Converter" [ref=e487] [cursor=pointer]:
+              - /url: /gp/browse.html?node=388305011&ref_=footer_tfx
+      - generic [ref=e489]:
+        - heading "Let Us Help You" [level=6] [ref=e490]
+        - list [ref=e491]:
+          - listitem [ref=e492]:
+            - link "Amazon and COVID-19" [ref=e493] [cursor=pointer]:
+              - /url: /gp/help/customer/display.html?nodeId=GDFU3JS5AL6SYHRD&ref_=footer_covid
+          - listitem [ref=e494]:
+            - link "Your Account" [ref=e495] [cursor=pointer]:
+              - /url: https://www.amazon.com/gp/css/homepage.html?ref_=footer_ya
+          - listitem [ref=e496]:
+            - link "Your Orders" [ref=e497] [cursor=pointer]:
+              - /url: https://www.amazon.com/gp/css/order-history?ref_=footer_yo
+          - listitem [ref=e498]:
+            - link "Shipping Rates & Policies" [ref=e499] [cursor=pointer]:
+              - /url: /gp/help/customer/display.html?nodeId=468520&ref_=footer_shiprates
+          - listitem [ref=e500]:
+            - link "Returns & Replacements" [ref=e501] [cursor=pointer]:
+              - /url: /gp/css/returns/homepage.html?ref_=footer_hy_f_4
+          - listitem [ref=e502]:
+            - link "Manage Your Content and Devices" [ref=e503] [cursor=pointer]:
+              - /url: /gp/digital/fiona/manage?ref_=footer_myk
+          - listitem [ref=e504]:
+            - link "Help" [ref=e505] [cursor=pointer]:
+              - /url: /gp/help/customer/display.html?nodeId=508510&ref_=footer_gw_m_b_he
+    - generic [ref=e507]:
+      - link "Amazon US Home" [ref=e510] [cursor=pointer]:
+        - /url: /?ref_=footer_logo
+      - generic [ref=e513]:
+        - generic [ref=e514]:
+          - link "Choose a language for shopping. Current selection is English." [ref=e515] [cursor=pointer]:
+            - /url: /customer-preferences/edit?ie=UTF8&preferencesReturnUrl=%2F&ref_=footer_lang
+            - generic [ref=e517]: English
+          - button "Expand to Change Language or Country" [ref=e518] [cursor=pointer]
+        - link "$ USD - U.S. Dollar" [ref=e519] [cursor=pointer]:
+          - /url: /customer-preferences/edit?ie=UTF8&ref_=footer_cop&preferencesReturnUrl=%2Fgp%2Fgoldbox%3Fref_%3Dnav_cs_gbgp%2Fgoldbox
+          - generic [ref=e520]: $
+          - generic [ref=e521]: USD - U.S. Dollar
+        - button "Choose a country/region for shopping. The current selection is United States." [ref=e522] [cursor=pointer]:
+          - generic [ref=e524]: United States
+    - navigation "More on Amazon" [ref=e525]:
+      - generic "More on Amazon" [ref=e526]:
+        - list [ref=e527]:
+          - listitem [ref=e528]:
+            - link "Amazon Music Stream millions of songs" [ref=e529] [cursor=pointer]:
+              - /url: https://music.amazon.com?ref=dm_aff_amz_com
+              - heading "Amazon Music" [level=5] [ref=e530]
+              - generic [ref=e531]:
+                - text: Stream millions
+                - text: of songs
+          - listitem [ref=e532]
+          - listitem [ref=e533]:
+            - link "Amazon Ads Reach customers wherever they spend their time" [ref=e534] [cursor=pointer]:
+              - /url: https://advertising.amazon.com/?ref=footer_advtsing_amzn_com
+              - heading "Amazon Ads" [level=5] [ref=e535]
+              - generic [ref=e536]:
+                - text: Reach customers
+                - text: wherever they
+                - text: spend their time
+          - listitem [ref=e537]
+          - listitem [ref=e538]:
+            - link "6pm Score deals on fashion brands" [ref=e539] [cursor=pointer]:
+              - /url: https://www.6pm.com
+              - heading "6pm" [level=5] [ref=e540]
+              - generic [ref=e541]:
+                - text: Score deals
+                - text: on fashion brands
+          - listitem [ref=e542]
+          - listitem [ref=e543]:
+            - link "AbeBooks Books, art & collectibles" [ref=e544] [cursor=pointer]:
+              - /url: https://www.abebooks.com
+              - heading "AbeBooks" [level=5] [ref=e545]
+              - generic [ref=e546]:
+                - text: Books, art
+                - text: "& collectibles"
+          - listitem [ref=e547]
+          - listitem [ref=e548]:
+            - link "ACX Audiobook Publishing Made Easy" [ref=e549] [cursor=pointer]:
+              - /url: https://www.acx.com/
+              - heading "ACX" [level=5] [ref=e550]
+              - generic [ref=e551]:
+                - text: Audiobook Publishing
+                - text: Made Easy
+          - listitem [ref=e552]
+          - listitem [ref=e553]:
+            - link "Sell on Amazon Start a Selling Account" [ref=e554] [cursor=pointer]:
+              - /url: https://sell.amazon.com/?ld=AZUSSOA-footer-aff&ref_=footer_sell
+              - heading "Sell on Amazon" [level=5] [ref=e555]
+              - generic [ref=e556]: Start a Selling Account
+          - listitem [ref=e557]
+          - listitem [ref=e558]:
+            - link "Veeqo Shipping Software Inventory Management" [ref=e559] [cursor=pointer]:
+              - /url: https://www.veeqo.com/?utm_source=amazon&utm_medium=website&utm_campaign=footer
+              - heading "Veeqo" [level=5] [ref=e560]
+              - generic [ref=e561]:
+                - text: Shipping Software
+                - text: Inventory Management
+        - list [ref=e562]:
+          - listitem [ref=e563]:
+            - link "Amazon Business Everything For Your Business" [ref=e564] [cursor=pointer]:
+              - /url: /business?ref_=footer_retail_b2b
+              - heading "Amazon Business" [level=5] [ref=e565]
+              - generic [ref=e566]:
+                - text: Everything For
+                - text: Your Business
+          - listitem [ref=e567]
+          - listitem [ref=e568]:
+            - link "AmazonGlobal Ship Orders Internationally" [ref=e569] [cursor=pointer]:
+              - /url: /gp/browse.html?node=230659011&ref_=footer_amazonglobal
+              - heading "AmazonGlobal" [level=5] [ref=e570]
+              - generic [ref=e571]:
+                - text: Ship Orders
+                - text: Internationally
+          - listitem [ref=e572]
+          - listitem [ref=e573]:
+            - link "Amazon Web Services Scalable Cloud Computing Services" [ref=e574] [cursor=pointer]:
+              - /url: https://aws.amazon.com/what-is-cloud-computing/?sc_channel=EL&sc_campaign=amazonfooter
+              - heading "Amazon Web Services" [level=5] [ref=e575]
+              - generic [ref=e576]:
+                - text: Scalable Cloud
+                - text: Computing Services
+          - listitem [ref=e577]
+          - listitem [ref=e578]:
+            - link "Audible Listen to Books & Original Audio Performances" [ref=e579] [cursor=pointer]:
+              - /url: https://www.audible.com
+              - heading "Audible" [level=5] [ref=e580]
+              - generic [ref=e581]:
+                - text: Listen to Books & Original
+                - text: Audio Performances
+          - listitem [ref=e582]
+          - listitem [ref=e583]:
+            - link "Box Office Mojo Find Movie Box Office Data" [ref=e584] [cursor=pointer]:
+              - /url: https://www.boxofficemojo.com/?ref_=amzn_nav_ftr
+              - heading "Box Office Mojo" [level=5] [ref=e585]
+              - generic [ref=e586]:
+                - text: Find Movie
+                - text: Box Office Data
+          - listitem [ref=e587]
+          - listitem [ref=e588]:
+            - link "Goodreads Book reviews & recommendations" [ref=e589] [cursor=pointer]:
+              - /url: https://www.goodreads.com
+              - heading "Goodreads" [level=5] [ref=e590]
+              - generic [ref=e591]:
+                - text: Book reviews
+                - text: "& recommendations"
+          - listitem [ref=e592]
+          - listitem [ref=e593]:
+            - link "IMDb Movies, TV & Celebrities" [ref=e594] [cursor=pointer]:
+              - /url: https://www.imdb.com
+              - heading "IMDb" [level=5] [ref=e595]
+              - generic [ref=e596]:
+                - text: Movies, TV
+                - text: "& Celebrities"
+        - list [ref=e597]:
+          - listitem [ref=e598]:
+            - link "IMDbPro Get Info Entertainment Professionals Need" [ref=e599] [cursor=pointer]:
+              - /url: https://pro.imdb.com?ref_=amzn_nav_ftr
+              - heading "IMDbPro" [level=5] [ref=e600]
+              - generic [ref=e601]:
+                - text: Get Info Entertainment
+                - text: Professionals Need
+          - listitem [ref=e602]
+          - listitem [ref=e603]:
+            - link "Kindle Direct Publishing Indie Digital & Print Publishing Made Easy" [ref=e604] [cursor=pointer]:
+              - /url: https://kdp.amazon.com
+              - heading "Kindle Direct Publishing" [level=5] [ref=e605]
+              - generic [ref=e606]:
+                - text: Indie Digital & Print Publishing
+                - text: Made Easy
+          - listitem [ref=e607]
+          - listitem [ref=e608]:
+            - link "Prime Video Direct Video Distribution Made Easy" [ref=e609] [cursor=pointer]:
+              - /url: https://videodirect.amazon.com/home/landing
+              - heading "Prime Video Direct" [level=5] [ref=e610]
+              - generic [ref=e611]:
+                - text: Video Distribution
+                - text: Made Easy
+          - listitem [ref=e612]
+          - listitem [ref=e613]:
+            - link "Shopbop Designer Fashion Brands" [ref=e614] [cursor=pointer]:
+              - /url: https://www.shopbop.com
+              - heading "Shopbop" [level=5] [ref=e615]
+              - generic [ref=e616]:
+                - text: Designer
+                - text: Fashion Brands
+          - listitem [ref=e617]
+          - listitem [ref=e618]:
+            - link "Woot! Deals and Shenanigans" [ref=e619] [cursor=pointer]:
+              - /url: https://www.woot.com/
+              - heading "Woot!" [level=5] [ref=e620]
+              - generic [ref=e621]:
+                - text: Deals and
+                - text: Shenanigans
+          - listitem [ref=e622]
+          - listitem [ref=e623]:
+            - link "Zappos Shoes & Clothing" [ref=e624] [cursor=pointer]:
+              - /url: https://www.zappos.com
+              - heading "Zappos" [level=5] [ref=e625]
+              - generic [ref=e626]:
+                - text: Shoes &
+                - text: Clothing
+          - listitem [ref=e627]
+          - listitem [ref=e628]:
+            - link "Ring Smart Home Security Systems" [ref=e629] [cursor=pointer]:
+              - /url: https://ring.com
+              - heading "Ring" [level=5] [ref=e630]
+              - generic [ref=e631]:
+                - text: Smart Home
+                - text: Security Systems
+        - list [ref=e632]:
+          - listitem [ref=e633]
+          - listitem [ref=e634]
+          - listitem [ref=e635]:
+            - link "eero WiFi Stream 4K Video in Every Room" [ref=e636] [cursor=pointer]:
+              - /url: https://eero.com/
+              - heading "eero WiFi" [level=5] [ref=e637]
+              - generic [ref=e638]:
+                - text: Stream 4K Video
+                - text: in Every Room
+          - listitem [ref=e639]
+          - listitem [ref=e640]:
+            - link "Blink Smart Security for Every Home" [ref=e641] [cursor=pointer]:
+              - /url: https://blinkforhome.com/?ref=nav_footer
+              - heading "Blink" [level=5] [ref=e642]
+              - generic [ref=e643]:
+                - text: Smart Security
+                - text: for Every Home
+          - listitem [ref=e644]
+          - listitem [ref=e645]:
+            - link "Neighbors App Real-Time Crime & Safety Alerts" [ref=e646] [cursor=pointer]:
+              - /url: https://shop.ring.com/pages/neighbors-app
+              - heading "Neighbors App" [level=5] [ref=e647]
+              - generic [ref=e648]:
+                - text: Real-Time Crime
+                - text: "& Safety Alerts"
+          - listitem [ref=e649]
+          - listitem [ref=e650]:
+            - link "Amazon Subscription Boxes Top subscription boxes – right to your door" [ref=e651] [cursor=pointer]:
+              - /url: /gp/browse.html?node=14498690011&ref_=amzn_nav_ftr_swa
+              - heading "Amazon Subscription Boxes" [level=5] [ref=e652]
+              - generic [ref=e653]: Top subscription boxes – right to your door
+          - listitem [ref=e654]
+          - listitem [ref=e655]:
+            - link "PillPack Pharmacy Simplified" [ref=e656] [cursor=pointer]:
+              - /url: https://www.pillpack.com
+              - heading "PillPack" [level=5] [ref=e657]
+              - generic [ref=e658]: Pharmacy Simplified
+          - listitem [ref=e659]
+          - listitem [ref=e660]
+    - generic [ref=e661]:
+      - list [ref=e662]:
+        - listitem [ref=e663]:
+          - link "Conditions of Use" [ref=e664] [cursor=pointer]:
+            - /url: /gp/help/customer/display.html?nodeId=508088&ref_=footer_cou
+        - listitem [ref=e665]:
+          - link "Privacy Notice" [ref=e666] [cursor=pointer]:
+            - /url: /gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ&ref_=footer_privacy
+        - listitem [ref=e667]:
+          - link "Consumer Health Data Privacy Disclosure" [ref=e668] [cursor=pointer]:
+            - /url: /gp/help/customer/display.html?ie=UTF8&nodeId=TnACMrGVghHocjL8KB&ref_=footer_consumer_health_data_privacy
+        - listitem [ref=e669]:
+          - link "Your Ads Privacy Choices" [ref=e670] [cursor=pointer]:
+            - /url: /privacyprefs?ref_=footer_iba
+        - listitem [ref=e671]
+      - generic [ref=e673]: © 1996-2026, Amazon.com, Inc. or its affiliates
+  - iframe [ref=e675]:
+    - iframe [ref=f3e2]:
+      - generic [active]:
+        - img [ref=f4e1]
+        - img [ref=f4e2]
+        - img [ref=f4e3]
+        - img [ref=f4e4]
+        - img [ref=f4e5]
+        - img [ref=f4e6]

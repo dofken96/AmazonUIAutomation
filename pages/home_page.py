@@ -26,7 +26,7 @@ class HomePage(BasePage):
 
     def verify_main_attributes_visible(self):
         expect(self.header.search_box).to_be_visible()
-        expect(self.header.card_link).to_be_visible()
+        expect(self.header.cart_link).to_be_visible()
         expect(self.header.hamburger_menu).to_be_visible()
 
 
@@ -36,3 +36,9 @@ class HomePage(BasePage):
 
     def validate_url(self, url: str):
         expect(self.page).to_have_url(url)
+
+
+    def dismiss_toaster(self):
+        """Remove the location/delivery toaster that can intercept clicks."""
+        self.page.evaluate("document.querySelector('.glow-toaster')?.remove()")
+        
