@@ -33,27 +33,24 @@ def test_product_search_result(localized_page):
 
 
 @pytest.mark.parametrize('product_numbers', [1,3])
-def test_add_product_cart_pdp(localized_page, product_numbers):
-    search_facade = SearchFacade(localized_page)
-    search_facade.add_products_to_cart('wireless mouse', product_numbers, localized_page)
+def test_add_product_cart_pdp(auth_localized_page, product_numbers):
+    search_facade = SearchFacade(auth_localized_page)
+    cart_facade = CartFacade(auth_localized_page)
 
-
-    cart_facade = CartFacade(localized_page)
-    cart_facade.remove_products_from_cart(localized_page)
+    search_facade.add_products_to_cart('wireless mouse', product_numbers)
+    cart_facade.remove_products_from_cart()
     
 
 
 @pytest.mark.parametrize('product_numbers', [3])
-@pytest.mark.xfail(reason = 'Flaky test due to possible issues with the checkout page loading or cart state management. Needs investigation.')
 def test_proceed_to_checkout(auth_localized_page, product_numbers):
     search_facade = SearchFacade(auth_localized_page)
     checkout_facade = CheckoutFacade(auth_localized_page)
     cart_facade = CartFacade(auth_localized_page)
 
-    search_facade.add_products_to_cart('wireless mouse', product_numbers, auth_localized_page)
-    checkout_facade.do_checkout(auth_localized_page)
-    cart_facade.remove_products_from_cart(auth_localized_page)
-
+    search_facade.add_products_to_cart('wireless mouse', product_numbers)
+    checkout_facade.do_checkout()
+    cart_facade.remove_products_from_cart()
 
 
 

@@ -5,10 +5,60 @@ class HomeFacade:
     def __init__(self, page):
         self.page = page
         self.page_factory = PageFactory(page)
-        
+        self.home_page = self.page_factory.home_page()
+        self.deals_page = self.page_factory.deals_page()
+        self.sign_in_page = self.page_factory.sign_in_page()
+        self.customer_service_page = self.page_factory.customer_service_page()
+        self.gift_cards_page = self.page_factory.gift_cards_page()
 
 
     def check_homepage_key_header_components(self):
-        home_page = self.page_factory.home_page()
-        home_page.open()
-        home_page.verify_main_attributes_visible()
+        self.home_page.open()
+        self.home_page.verify_main_attributes_visible()
+
+    def navigate_to_today_deals(self):
+        self.home_page.open()
+        self.home_page.header.go_to_deals_page()
+        self.deals_page.verify_deals_page_loaded()
+
+    def verify_hamburger_departments_list(self):
+        self.home_page.open()
+        self.home_page.header.navigate_to_hamburger_menu()
+        self.home_page.header.verify_departments_list()
+
+    def verify_footer_policy_link(self):
+        self.home_page.open()
+        self.home_page.footer.verify_footer_visible()
+        self.home_page.footer.verify_policy_link_works()
+
+    def verify_mobile_header(self):
+        self.home_page.open()
+        self.home_page.verify_main_attributes_visible()
+
+    def verify_language_region_selector(self):
+        self.home_page.open()
+        self.home_page.header.open_language_region_selector()
+        self.home_page.header.verify_language_region_selector_opened()
+
+    def verify_search_suggestions(self, partial_query: str):
+        self.home_page.open()
+        self.home_page.header.open_search_suggestions(partial_query)
+        self.home_page.header.verify_search_suggestions_visible(partial_query)
+
+    def open_sign_in_via_account_lists(self):
+        self.home_page.open()
+        self.home_page.header.open_sign_in_page_via_account_lists()
+        self.sign_in_page.verify_sign_in_page_loaded()
+
+    def open_customer_service_page(self):
+        self.home_page.open()
+        self.home_page.header.open_customer_service_page()
+        self.customer_service_page.verify_customer_service_page_loaded()
+
+    def open_gift_cards_page(self):
+        self.home_page.open()
+        self.home_page.header.open_gift_cards_page()
+        self.gift_cards_page.verify_gift_cards_page_loaded()
+
+    def verify_no_severe_console_errors(self):
+        self.home_page.verify_no_severe_console_errors()

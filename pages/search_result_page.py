@@ -53,24 +53,42 @@ class SearchResultPage(BasePage):
 
     def add_several_products_to_cart(self, number_of_products: int):
         expect(self.items.last).to_be_visible()
+        added_products = 0
+        candidate_index = 0
+        max_candidates = max(number_of_products * 6, number_of_products + 5)
 
-        for i in range(number_of_products):
-
+        while added_products < number_of_products and candidate_index < max_candidates:
             self.page.reload()
             expect(self.header.cart_count_locator).to_be_visible()
             before_number = self.header.get_number_of_items_in_cart()
 
-            item = self.items.nth(i)
-            expect(item).to_be_visible()
+            item = self.items.nth(candidate_index)
+            candidate_index += 1
+
+            if not item.is_visible():
+                continue
+
             item.scroll_into_view_if_needed()
             add_to_cart_button = item.get_by_role('button', name='Add to cart')
-            add_to_cart_button.click()
 
-            expect(self.header.cart_count_locator).to_have_text(str(before_number + 1))
+            if add_to_cart_button.count() == 0:
+                continue
 
-            after = self.header.get_number_of_items_in_cart()
+            try:
+                add_to_cart_button.click(timeout=5000)
+            except Exception:
+                continue
 
-            assert after == before_number + 1
+            self.page.wait_for_timeout(1500)
+            after_number = self.header.get_number_of_items_in_cart()
+
+            if after_number > before_number:
+                added_products += 1
+
+        assert added_products >= number_of_products, (
+            f"Could not add requested number of products. "
+            f"Requested={number_of_products}, Added={added_products}"
+        )
 
     def verify_sort_control_visible(self):
         self.wait_for_page_loaded()

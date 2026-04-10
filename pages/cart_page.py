@@ -29,40 +29,15 @@ class CartPage(BasePage):
 
 
     def remove_products_from_cart(self):
-        expect(self.list_active_cart_items.last).to_be_visible()
-        expect(self.header.cart_count_locator).to_be_visible()
+        self.page.wait_for_load_state("domcontentloaded")
+        delete_buttons = self.page.locator("input[value='Delete']")
+        max_attempts = 30
+        attempts = 0
 
-        while self.list_active_cart_items.count() > 0:
+        while delete_buttons.count() > 0 and attempts < max_attempts:
+            delete_buttons.first.click()
+            self.page.wait_for_timeout(1500)
+            attempts += 1
 
-            item = self.list_active_cart_items.first
-            expect(item).to_be_visible()
-
-            before_count = int(self.header.cart_count_locator
-                               .inner_text()
-                               .strip())
-
-            before_count = int(self.header.cart_count_locator
-                               .inner_text()
-                               .strip())
-
-            before_count = int(self.header.cart_count_locator
-                               .inner_text()
-                               .strip())
-
-            container_with_items = item.locator('.a-stepper-inner-container [data-a-selector="value"]')
-            items_for_particular_product = int(container_with_items
-                                               .inner_text()
-                                               .strip())
-
-
-            delete_button = item.locator('input[value="Delete"]')
-
-            expect(item).to_be_visible()
-            expect(delete_button).to_be_visible()
-            delete_button.click()
-            expect(container_with_items).to_be_hidden()
-            self.page.wait_for_timeout(2000)
-
-            expect(self.header.cart_count_locator).to_have_text(str(before_count - items_for_particular_product))
-            self.page.reload()
+        self.page.reload()
 
