@@ -4,28 +4,35 @@ from urllib.parse import unquote_plus, unquote
 from playwright.sync_api import expect
 
 from config import BASE_URL
-from factories.page_factory import PageFactory
+from facedes.base_facade import BaseFacade
 
 
-class SearchFacade:
+class SearchFacade(BaseFacade):
     def __init__(self, page):
-        self.page = page
-        self.page_factory = PageFactory(page)
+        super().__init__(page)
         self.home_page = self.page_factory.home_page()
         self.search_result_page = self.page_factory.search_result_page()
         self.pdp_page = self.page_factory.pdp_page()
 
     def search_a_product(self, product_name):
-        self.home_page.open()
-        self.home_page.verify_main_attributes_visible()
-        self.home_page.search_a_product(product_name)
-        self.search_result_page.validate_searched_product_name(product_name)
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Verify homepage header state", self.home_page.verify_main_attributes_visible),
+                ("Search product", lambda: self.home_page.search_a_product(product_name)),
+                ("Validate search result header", lambda: self.search_result_page.validate_searched_product_name(product_name)),
+            )
+        )
 
     def verify_search_query_encoded_in_url(self, query: str):
         """AMZ-0171: k= param is URL-encoded; after reload, search box shows decoded query."""
-        self.home_page.open()
-        self.home_page.search_a_product(query)
-        self.page.wait_for_load_state('domcontentloaded')
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Search product", lambda: self.home_page.search_a_product(query)),
+                ("Wait for SERP load", lambda: self.page.wait_for_load_state("domcontentloaded")),
+            )
+        )
         expect(self.page).to_have_url(re.compile(r'/s[/?]'))
         url = self.page.url
         match = re.search(r'[?&](?:k|field-keywords)=([^&]*)', url)
@@ -43,9 +50,13 @@ class SearchFacade:
 
     def verify_brand_filter_refines_results_and_shows_active_chip(self, query: str):
         """AMZ-0172: Apply brand filter and verify active filter indicator is visible."""
-        self.home_page.open()
-        self.home_page.search_a_product(query)
-        self.search_result_page.verify_results_visible()
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Search product", lambda: self.home_page.search_a_product(query)),
+                ("Verify results are visible", self.search_result_page.verify_results_visible),
+            )
+        )
 
         baseline_url = self.page.url
         selected_brand = self.search_result_page.apply_first_available_brand_filter()
@@ -62,9 +73,13 @@ class SearchFacade:
 
     def verify_remove_individual_brand_filter_by_chip(self, query: str):
         """AMZ-0173: Remove a selected brand filter and verify chip disappears."""
-        self.home_page.open()
-        self.home_page.search_a_product(query)
-        self.search_result_page.verify_results_visible()
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Search product", lambda: self.home_page.search_a_product(query)),
+                ("Verify results are visible", self.search_result_page.verify_results_visible),
+            )
+        )
 
         selected_brand = self.search_result_page.apply_first_available_brand_filter()
         if not selected_brand:
@@ -84,16 +99,27 @@ class SearchFacade:
 
     def verify_sort_dropdown_includes_expected_entries(self, query: str, minimum_options: int = 5):
         """AMZ-0174: Sort control exposes at least the expected number of options."""
-        self.home_page.open()
-        self.home_page.search_a_product(query)
-        self.search_result_page.verify_results_visible()
-        self.search_result_page.verify_sort_options_count_at_least(minimum_options=minimum_options)
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Search product", lambda: self.home_page.search_a_product(query)),
+                ("Verify results are visible", self.search_result_page.verify_results_visible),
+                (
+                    "Verify sort options count",
+                    lambda: self.search_result_page.verify_sort_options_count_at_least(minimum_options=minimum_options),
+                ),
+            )
+        )
 
     def verify_free_shipping_filter_applies_and_badge_present(self, query: str):
         """AMZ-0175: Apply Free Shipping/Prime filter and verify shipping badge appears."""
-        self.home_page.open()
-        self.home_page.search_a_product(query)
-        self.search_result_page.verify_results_visible()
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Search product", lambda: self.home_page.search_a_product(query)),
+                ("Verify results are visible", self.search_result_page.verify_results_visible),
+            )
+        )
         applied_filter = self.search_result_page.apply_free_shipping_or_prime_filter()
         if not applied_filter:
             print("[AMZ-0175] Soft-pass: Free Shipping/Prime filter is unavailable in this SERP variant.")
@@ -102,9 +128,13 @@ class SearchFacade:
 
     def verify_department_left_nav_updates_breadcrumb(self, query: str):
         """AMZ-0176: Department left-nav selection updates breadcrumb/heading context."""
-        self.home_page.open()
-        self.home_page.search_a_product(query)
-        self.search_result_page.verify_results_visible()
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Search product", lambda: self.home_page.search_a_product(query)),
+                ("Verify results are visible", self.search_result_page.verify_results_visible),
+            )
+        )
 
         baseline_url = self.page.url
         selected_department = self.search_result_page.apply_department_filter_from_left_nav()
@@ -121,9 +151,13 @@ class SearchFacade:
 
     def verify_price_inputs_accept_numeric_and_reject_non_numeric(self, query: str):
         """AMZ-0177: Price inputs sanitize non-numeric and apply valid numeric range."""
-        self.home_page.open()
-        self.home_page.search_a_product(query)
-        self.search_result_page.verify_results_visible()
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Search product", lambda: self.home_page.search_a_product(query)),
+                ("Verify results are visible", self.search_result_page.verify_results_visible),
+            )
+        )
 
         applied = self.search_result_page.verify_price_inputs_numeric_and_apply_range(50, 200)
         if not applied:
@@ -132,9 +166,13 @@ class SearchFacade:
 
     def verify_rating_filter_four_stars_and_up_shows_indicator(self, query: str):
         """AMZ-0178: Apply 4 Stars & Up and verify active rating filter indicator/state."""
-        self.home_page.open()
-        self.home_page.search_a_product(query)
-        self.search_result_page.verify_results_visible()
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Search product", lambda: self.home_page.search_a_product(query)),
+                ("Verify results are visible", self.search_result_page.verify_results_visible),
+            )
+        )
         baseline_url = self.page.url
 
         applied = self.search_result_page.apply_rating_filter_four_stars_and_up()
@@ -148,9 +186,13 @@ class SearchFacade:
 
     def verify_multiple_filters_cumulative_effect_reflected_in_url(self, query: str):
         """AMZ-0179: Multiple filters should be cumulatively reflected in URL params."""
-        self.home_page.open()
-        self.home_page.search_a_product(query)
-        self.search_result_page.verify_results_visible()
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Search product", lambda: self.home_page.search_a_product(query)),
+                ("Verify results are visible", self.search_result_page.verify_results_visible),
+            )
+        )
 
         baseline_url = self.page.url
         first_brand = self.search_result_page.apply_first_available_brand_filter()
@@ -191,9 +233,13 @@ class SearchFacade:
 
     def verify_suggestion_click_navigates_to_results_term(self, partial_query: str):
         """AMZ-0180: Clicking a suggestion navigates to results for that suggestion term."""
-        self.home_page.open()
-        self.home_page.header.open_search_suggestions(partial_query)
-        self.home_page.header.verify_search_suggestions_visible(partial_query)
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Open search suggestions", lambda: self.home_page.header.open_search_suggestions(partial_query)),
+                ("Verify suggestions are visible", lambda: self.home_page.header.verify_search_suggestions_visible(partial_query)),
+            )
+        )
 
         selected_text = self.home_page.header.click_first_search_suggestion(partial_query)
         if not selected_text:
@@ -218,9 +264,13 @@ class SearchFacade:
 
     def verify_search_within_results_refines_query_and_updates_list(self, initial_query: str, refined_query: str):
         """AMZ-0181: Refine query on SERP and verify results/state update."""
-        self.home_page.open()
-        self.home_page.search_a_product(initial_query)
-        self.search_result_page.verify_results_visible()
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Search initial product", lambda: self.home_page.search_a_product(initial_query)),
+                ("Verify results are visible", self.search_result_page.verify_results_visible),
+            )
+        )
 
         baseline_url = self.page.url
         baseline_first = (self.search_result_page.items.first.inner_text() or "").strip().lower()
@@ -244,9 +294,13 @@ class SearchFacade:
 
     def verify_click_see_more_expands_filter_options(self, query: str):
         """AMZ-0182: Click 'See more' and verify filter options expand."""
-        self.home_page.open()
-        self.home_page.search_a_product(query)
-        self.search_result_page.verify_results_visible()
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Search product", lambda: self.home_page.search_a_product(query)),
+                ("Verify results are visible", self.search_result_page.verify_results_visible),
+            )
+        )
 
         expanded = self.search_result_page.expand_filter_section_with_see_more()
         if not expanded:
@@ -255,9 +309,13 @@ class SearchFacade:
 
     def verify_color_filter_applies_and_indicator_visible(self, query: str):
         """AMZ-0183: Apply color filter and verify active filter/state indication."""
-        self.home_page.open()
-        self.home_page.search_a_product(query)
-        self.search_result_page.verify_results_visible()
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Search product", lambda: self.home_page.search_a_product(query)),
+                ("Verify results are visible", self.search_result_page.verify_results_visible),
+            )
+        )
         baseline_url = self.page.url
 
         color = self.search_result_page.apply_color_filter()
@@ -270,8 +328,12 @@ class SearchFacade:
 
     def verify_prime_filter_toggle_on_off_updates_results(self, query: str):
         """AMZ-0184: Toggle Prime on/off and verify state changes."""
-        self.home_page.open()
-        self.home_page.search_a_product(query)
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Search product", lambda: self.home_page.search_a_product(query)),
+            )
+        )
         if not re.search(r"/s[/?]", self.page.url):
             print("[AMZ-0184] Soft-pass: query redirected to non-SERP page; Prime facet unavailable.")
             return
@@ -298,9 +360,13 @@ class SearchFacade:
 
     def verify_sort_and_filter_persist_across_pagination(self, query: str):
         """AMZ-0185: Sort + filter combination should persist on next page."""
-        self.home_page.open()
-        self.home_page.search_a_product(query)
-        self.search_result_page.verify_results_visible()
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Search product", lambda: self.home_page.search_a_product(query)),
+                ("Verify results are visible", self.search_result_page.verify_results_visible),
+            )
+        )
 
         filter_applied = bool(self.search_result_page.apply_first_available_brand_filter())
         sort_choice = self.search_result_page.open_sort_dropdown_and_select_non_default()
@@ -322,9 +388,13 @@ class SearchFacade:
 
     def verify_clear_all_resets_scroll_and_filters(self, query: str):
         """AMZ-0186: Clear all resets filter state and scroll position."""
-        self.home_page.open()
-        self.home_page.search_a_product(query)
-        self.search_result_page.verify_results_visible()
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Search product", lambda: self.home_page.search_a_product(query)),
+                ("Verify results are visible", self.search_result_page.verify_results_visible),
+            )
+        )
 
         self.page.mouse.wheel(0, 2400)
         selected_brand = self.search_result_page.apply_first_available_brand_filter()
@@ -376,9 +446,13 @@ class SearchFacade:
                 errors.append(msg.text)
 
         self.page.on("console", on_console)
-        self.home_page.open()
-        self.home_page.search_a_product(query)
-        self.search_result_page.verify_results_visible()
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Search product", lambda: self.home_page.search_a_product(query)),
+                ("Verify results are visible", self.search_result_page.verify_results_visible),
+            )
+        )
 
         mixed = [
             entry for entry in errors
@@ -388,9 +462,13 @@ class SearchFacade:
 
     def verify_filter_state_remains_after_open_result_and_back(self, query: str):
         """AMZ-0190: Filter state remains after opening result in same tab and going back."""
-        self.home_page.open()
-        self.home_page.search_a_product(query)
-        self.search_result_page.verify_results_visible()
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Search product", lambda: self.home_page.search_a_product(query)),
+                ("Verify results are visible", self.search_result_page.verify_results_visible),
+            )
+        )
 
         selected = self.search_result_page.apply_first_available_brand_filter()
         if not selected:
@@ -420,17 +498,24 @@ class SearchFacade:
 
 
     def verify_searched_product_result(self, product_name):
-        self.home_page.open()
-        self.home_page.search_a_product(product_name)
-        self.search_result_page.click_on_first_product()
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Search product", lambda: self.home_page.search_a_product(product_name)),
+                ("Open first product from search result", self.search_result_page.click_on_first_product),
+            )
+        )
         product_title = self.pdp_page.get_product_title_name()
         assert product_title.strip() != "", "Product title should not be empty"
 
 
     def add_products_to_cart(self, product_name, product_numbers):
-        self.home_page.open()
-        self.home_page.search_a_product(product_name)
-
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Search product", lambda: self.home_page.search_a_product(product_name)),
+            )
+        )
         before_count = self.home_page.header.get_number_of_items_in_cart()
         self.page.reload()
         self.search_result_page.add_several_products_to_cart(product_numbers)
@@ -440,17 +525,29 @@ class SearchFacade:
         assert before_count < after_count
 
     def verify_sorting_control_visible(self, product_name):
-        self.home_page.open()
-        self.home_page.search_a_product(product_name)
-        self.search_result_page.verify_sort_control_visible()
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Search product", lambda: self.home_page.search_a_product(product_name)),
+                ("Verify sorting control is visible", self.search_result_page.verify_sort_control_visible),
+            )
+        )
 
     def verify_product_image_gallery_present(self, product_name):
-        self.home_page.open()
-        self.home_page.search_a_product(product_name)
-        self.search_result_page.click_on_first_product()
-        self.pdp_page.verify_product_gallery_visible()
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Search product", lambda: self.home_page.search_a_product(product_name)),
+                ("Open first product", self.search_result_page.click_on_first_product),
+                ("Verify product gallery is visible", self.pdp_page.verify_product_gallery_visible),
+            )
+        )
 
     def verify_pagination_next_control_visible(self, product_name):
-        self.home_page.open()
-        self.home_page.search_a_product(product_name)
-        self.search_result_page.verify_pagination_next_control_visible()
+        self.invoke(
+            (
+                ("Open homepage", self.home_page.open),
+                ("Search product", lambda: self.home_page.search_a_product(product_name)),
+                ("Verify pagination next control", self.search_result_page.verify_pagination_next_control_visible),
+            )
+        )
