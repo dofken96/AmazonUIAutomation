@@ -87,6 +87,29 @@ class HeaderComponents(BasePage):
         expect(suggestions_container).to_be_visible(timeout=10000)
         expect(first_suggestion).to_be_visible(timeout=10000)
 
+    def click_first_search_suggestion(self, partial_query: str) -> str | None:
+        suggestions_container = self.page.locator("#nav-flyout-searchAjax")
+        all_suggestions = suggestions_container.locator("div[role='button'], .s-suggestion, li")
+
+        expect(suggestions_container).to_be_visible(timeout=10000)
+        if all_suggestions.count() == 0:
+            return None
+
+        for index in range(min(all_suggestions.count(), 8)):
+            suggestion = all_suggestions.nth(index)
+            if not suggestion.is_visible():
+                continue
+            text = (suggestion.inner_text() or "").strip()
+            if not text or len(text) < 2:
+                continue
+            if partial_query.lower() not in text.lower():
+                continue
+            suggestion.click(timeout=7000)
+            self.page.wait_for_load_state("domcontentloaded")
+            return text
+
+        return None
+
     def open_sign_in_page_via_account_lists(self):
         expect(self.account_and_lists_nav).to_be_visible(timeout=15000)
         self.account_and_lists_nav.click()
@@ -108,5 +131,3 @@ class HeaderComponents(BasePage):
             menu_link.click()
 
         self.page.wait_for_load_state('domcontentloaded')
-
-
