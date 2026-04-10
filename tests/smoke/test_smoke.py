@@ -1,5 +1,10 @@
 import pytest
 
+from facedes.cart_facade import CartFacade
+from facedes.checkout_facade import CheckoutFacade
+from facedes.home_facade import HomeFacade
+from facedes.search_facade import SearchFacade
+from factories.page_factory import PageFactory
 from pages.cart_page import CartPage
 from pages.checkout_page import CheckoutPage
 from pages.customer_service_page import CustomerServicePage
@@ -13,80 +18,42 @@ from pages.sign_in_page import SignInPage
 
 
 def test_homepage_key_header_components(page):
-    home_page = HomePage(page)
-    home_page.open()
-    home_page.verify_main_attributes_visible()
-
+    home_facade = HomeFacade(page)
+    home_facade.check_homepage_key_header_components()
 
 
 def test_search_header_returns_results(page):
-    home_page = HomePage(page)
-    search_result_page = SearchResultPage(page)
-    home_page.open()
-    home_page.search_a_product('laptop')
-    search_result_page.validate_searched_product_name('laptop')
+    search_facade = SearchFacade(page)
+    search_facade.search_a_product('laptop')
 
 
 def test_product_search_result(localized_page):
-    home_page = HomePage(localized_page)
-    search_result_page = SearchResultPage(localized_page)
-    pdp_page = ProductDetailPage(localized_page)
-
-    home_page.open()
-    home_page.search_a_product('wireless mouse')
-    search_result_page.click_on_first_product()
-    product_name = pdp_page.get_product_title_name()
-    assert product_name != '', 'Product title should not be empty'
-
+    search_facade = SearchFacade(localized_page)
+    search_facade.verify_searched_product_result('wireless mouse')
 
 
 @pytest.mark.parametrize('product_numbers', [1,3])
 def test_add_product_cart_pdp(localized_page, product_numbers):
-    home_page = HomePage(localized_page)
-    search_result_page = SearchResultPage(localized_page)
-    cart_page = CartPage(localized_page)
-
-    home_page.open()
-    home_page.search_a_product('wireless mouse')
-
-    localized_page.reload()
-    before_count = home_page.header.get_number_of_items_in_cart()
-
-    search_result_page.add_several_products_to_cart(product_numbers)
-    localized_page.reload()
-    after_count = home_page.header.get_number_of_items_in_cart()
-
-    assert before_count < after_count
-
-    search_result_page.header.open_cart_page()
-    cart_page.get_cart_items()
-    cart_page.remove_products_from_cart()
-
-    localized_page.reload()
-    items_in_cart_after_removal = home_page.header.get_number_of_items_in_cart()
-
-    assert items_in_cart_after_removal == 0
+    search_facade = SearchFacade(localized_page)
+    search_facade.add_products_to_cart('wireless mouse', product_numbers, localized_page)
 
 
-
+    cart_facade = CartFacade(localized_page)
+    cart_facade.remove_products_from_cart(localized_page)
+    
 
 
 @pytest.mark.parametrize('product_numbers', [3])
 @pytest.mark.xfail(reason = 'Flaky test due to possible issues with the checkout page loading or cart state management. Needs investigation.')
 def test_proceed_to_checkout(auth_localized_page, product_numbers):
-    home_page = HomePage(auth_localized_page)
-    search_result_page = SearchResultPage(auth_localized_page)
-    cart_page = CartPage(auth_localized_page)
-    check_out_page = CheckoutPage(auth_localized_page)
+    search_facade = SearchFacade(auth_localized_page)
+    checkout_facade = CheckoutFacade(auth_localized_page)
+    cart_facade = CartFacade(auth_localized_page)
 
-    home_page.open()
-    home_page.search_a_product('wireless mouse')
-    search_result_page.add_several_products_to_cart(product_numbers)
-    search_result_page.header.open_cart_page()
-    cart_page.proceed_to_checkout()
-    check_out_page.check_checkout_page_loaded()
-    cart_page.header.open_cart_page()
-    cart_page.remove_products_from_cart()
+    search_facade.add_products_to_cart('wireless mouse', product_numbers, auth_localized_page)
+    checkout_facade.do_checkout(auth_localized_page)
+    cart_facade.remove_products_from_cart(auth_localized_page)
+
 
 
 
