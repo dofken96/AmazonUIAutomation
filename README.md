@@ -1,69 +1,66 @@
 # Amazon UI Automation
 
-UI test automation framework for Amazon flows, built with Python, Playwright, and Pytest using a Page Object Model (POM) architecture.
+Python + Playwright + Pytest test automation framework for Amazon UI validation.
 
-## What This Project Covers
+## Overview
 
-This repository automates core user journeys on Amazon, including:
+This repository contains an end-to-end smoke suite for key Amazon user journeys:
 
-- Homepage validation (critical header elements).
-- Product search and search-result checks.
-- Product detail page (PDP) navigation.
-- Add-to-cart and cart cleanup scenarios.
-- Checkout entry flow (currently marked as `xfail` due to known flakiness).
-- Top navigation checks (Today's Deals, hamburger menu).
-- Footer and language/region interaction checks.
-- Basic mobile viewport smoke coverage.
+- Header and homepage visibility checks.
+- Search and search results validation.
+- Product detail page (PDP) navigation and gallery checks.
+- Add-to-cart and checkout flow.
+- Deals, footer, language/region, and account entry points.
+- Customer Service and Gift Cards navigation.
+- Basic mobile viewport validation.
+- Console-error smoke validation.
 
-The framework is designed to be extendable for larger regression suites while keeping smoke tests fast and readable.
+Smoke tracking and case-level status live in `data/smoke_test_cases.md`.
 
-## Tech Stack
+## Architecture
 
-- Python 3.13 (project currently runs in a local `.venv`).
-- `playwright` for browser automation.
-- `pytest` as the test runner.
-- `pytest-playwright` for Playwright integration with pytest.
-- `python-dotenv` for environment-based configuration.
+The framework uses layered test design:
+
+1. **Page Objects** (`pages/`, `components/`)
+   - Encapsulate selectors, actions, and assertions.
+2. **Factory** (`factories/page_factory.py`)
+   - Provides cached page-object instances per test page context.
+3. **Facades** (`facedes/`)
+   - Orchestrate multi-step flows and reduce duplication in tests.
+4. **Tests** (`tests/smoke/test_smoke.py`)
+   - Thin scenario definitions that call facades.
+
+This structure keeps tests readable and centralizes maintenance when UI behavior changes.
 
 ## Project Structure
 
 ```text
 AmazonUI/
-  components/              # Reusable UI components (header, footer)
-  data/                    # Test matrix and smoke case definitions
-  fixtures/                # Pytest fixtures (browser/page/context setup)
-  pages/                   # Page Objects (Home, Cart, PDP, Deals, etc.)
-  scripts/                 # Helper scripts (auth state bootstrap)
+  components/              # Shared UI components (header/footer)
+  data/                    # Smoke matrix and tracking files
+  facedes/                 # Flow facades (home/search/cart/checkout)
+  factories/               # Page object factory
+  fixtures/                # Pytest fixtures and browser/context setup
+  pages/                   # Page Objects
+  scripts/                 # Auth/session helper scripts
   tests/
     smoke/                 # Main smoke suite
-    generated_tests.py     # Generated/experimental tests
-  utils/                   # Utility helpers
-  config.py                # Env-driven runtime config
-  conftest.py              # Global pytest plugin wiring
-  pytest.ini               # Pytest config (currently minimal)
+  utils/                   # Support utilities
+  config.py                # Env-based configuration
+  conftest.py              # Global pytest plugin registration
+  pytest.ini               # Pytest configuration
 ```
-
-## Architecture and Conventions
-
-- Page Object Model:
-  - `pages/` holds page-level actions and assertions.
-  - `components/` holds shared page fragments (for example header/footer).
-- Fixtures:
-  - `fixtures/ui_fixtures.py` creates browser contexts for desktop, mobile, localized, and authenticated sessions.
-- Environment-based config:
-  - `config.py` loads values from `.env`.
-- Navigation robustness:
-  - `BasePage.safe_goto()` retries flaky Amazon navigations for better stability.
 
 ## Prerequisites
 
-- Windows, macOS, or Linux with Python 3.10+ (3.13 used in this project).
-- Node.js available (recommended for Playwright tooling and MCP workflows).
-- A valid internet connection to access target Amazon environment.
+- Python 3.13 (current project runtime).
+- Virtual environment (`.venv`).
+- Playwright browsers installed (Chromium used here).
+- Valid test credentials for checkout/sign-in flows.
 
-## Environment Variables
+## Environment Configuration
 
-Create a `.env` file in the project root with:
+Create `.env` in project root:
 
 ```env
 BASE_URL=https://www.amazon.com/
@@ -71,73 +68,50 @@ LOGIN_EMAIL=your_test_email
 LOGIN_PASSWORD=your_test_password
 ```
 
-Notes:
-
-- Use non-production test credentials whenever possible.
-- Auth-related flows rely on these values to create/reuse storage state in `scripts/.auth/`.
-
 ## Setup
-
-1. Create and activate a virtual environment.
-2. Install dependencies.
-3. Install Playwright browser binaries.
-
-Example (PowerShell):
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
-pip install playwright pytest pytest-playwright python-dotenv
+pip install -r requirements.txt
 python -m playwright install chromium
 ```
 
-## Running Tests
-
-Run all tests:
+If `requirements.txt` is missing in your branch, install manually:
 
 ```powershell
-.\.venv\Scripts\python.exe -m pytest -q
+pip install playwright pytest pytest-playwright python-dotenv
 ```
 
-Run smoke suite only:
+## Run Tests
+
+Run smoke suite:
 
 ```powershell
 .\.venv\Scripts\python.exe -m pytest tests\smoke\test_smoke.py -q
 ```
 
-Collect-only (sanity check):
+Run full project tests:
 
 ```powershell
-.\.venv\Scripts\python.exe -m pytest --collect-only -q
+.\.venv\Scripts\python.exe -m pytest -q
 ```
 
-## Current Smoke Suite Status
+Collect-only sanity check:
 
-- The smoke suite currently includes 11 collected tests in `tests/smoke/test_smoke.py`.
-- Checkout flow test is intentionally marked with `@pytest.mark.xfail` due to known instability in checkout/cart/auth state transitions.
-- Detailed planned smoke matrix is documented in `data/smoke_test_cases.md`.
+```powershell
+.\.venv\Scripts\python.exe -m pytest tests\smoke\test_smoke.py --collect-only -q
+```
 
-## Using Playwright MCP Alongside This Project
+## Current Status
 
-Playwright MCP is useful for rapid selector discovery and flow exploration before codifying tests:
+- Smoke suite currently collects **19 tests**.
+- Checkout smoke (`test_proceed_to_checkout`) is active (not xfail) and includes sign-in redirect handling.
+- Current validated baseline: full smoke run passes.
 
-1. Explore/validate UI behavior with MCP in a live browser session.
-2. Convert stable selectors into page objects under `pages/` or `components/`.
-3. Add scenario coverage in `tests/smoke/` (or future `tests/regression/`).
-4. Execute with pytest and stabilize flaky steps.
+## Notes on Stability
 
-This approach keeps test code maintainable while speeding up authoring/debug cycles.
-
-## Known Risks and Stability Notes
-
-- Amazon UI can vary by locale, experiments, and anti-bot checks.
-- Flakiness can appear around localization popovers, add-to-cart timing, and checkout redirects.
-- Prefer role-based and resilient locators, and keep assertions focused on business-critical outcomes.
-
-## Next Improvements (Suggested)
-
-1. Add `requirements.txt` or `pyproject.toml` for reproducible dependency management.
-2. Configure `pytest.ini` markers (`smoke`, `regression`, `auth`) and default options.
-3. Add CI execution with artifact capture (screenshots, traces, videos).
-4. Expand suite from smoke to regression using the test matrix in `data/`.
+- Amazon UI is dynamic by locale, account state, experiments, and anti-bot behavior.
+- Tests use resilient locators and flow-level retries where needed.
+- Auth-dependent flows rely on `scripts/.auth` state + `.env` credentials.
